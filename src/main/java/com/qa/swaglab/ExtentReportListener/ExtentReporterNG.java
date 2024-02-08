@@ -25,8 +25,7 @@ public class ExtentReporterNG implements IReporter  {
 	private ExtentReports extent;
 	ExtentSparkReporter spark ;
 	
-	@Override
-    public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
+	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
 		//spark report 
 		extent = new ExtentReports();
 		spark = new ExtentSparkReporter(outputDirectory + File.separator + "ExtentReportTestNG_Ashish.html");

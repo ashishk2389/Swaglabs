@@ -35,7 +35,7 @@ public class ExcelReader {
 	public static String[][] getLoginCredenatils(String sheetName) throws IOException 
 	{
 
-		   File file = new File("/Users/ashishkumar/git/Swaglabs/SwaglabsProject/src/main/resources/Elements.xlsx");
+		   File file = new File("user.dir" + "/src/main/resources/Elements.xlsx");
 	         FileInputStream fIP = new FileInputStream(file);
 		
 			//	new XSSFWorkbook(file);

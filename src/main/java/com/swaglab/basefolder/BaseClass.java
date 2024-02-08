@@ -29,7 +29,7 @@ public class BaseClass {
     {
     	prop = new Properties();
 		try {
-			FileInputStream fin = new FileInputStream("/Users/ashishkumar/git/Swaglabs/SwaglabsProject/src/main/java/com/swaglab/configcomponent/Config.properties");
+			FileInputStream fin = new FileInputStream("user.dir" + "/configcomponent/Config.properties");
 			prop.load(fin);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -50,7 +50,7 @@ public class BaseClass {
     	/* Chrome driver*/
     	if(browserName.equals("chrome")) {
     		System.setProperty("webdriver.chrome.driver",
-					"/Users/ashishkumar/Work/Work/selenium_resource/chromedriver_mac64/chromedriver");
+    				"user.dir" + "/selenium_resource/chromedriver_mac64/chromedriver");
     		driver  = new ChromeDriver();
     		
     	}
