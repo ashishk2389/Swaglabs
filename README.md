@@ -1,2 +1,0 @@
-# Swaglabs
-testing practice
