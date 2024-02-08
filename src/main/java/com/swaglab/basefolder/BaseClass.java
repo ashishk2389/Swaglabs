@@ -29,7 +29,7 @@ public class BaseClass {
     {
     	prop = new Properties();
 		try {
-			FileInputStream fin = new FileInputStream("user.dir" + "/configcomponent/Config.properties");
+			FileInputStream fin = new FileInputStream(System.getProperty("user.dir") + "/src/main/java/com/swaglab/configcomponent/Config.properties");
 			prop.load(fin);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
