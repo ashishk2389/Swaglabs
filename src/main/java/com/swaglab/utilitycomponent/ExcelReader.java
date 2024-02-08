@@ -35,11 +35,10 @@ public class ExcelReader {
 	public static String[][] getLoginCredenatils(String sheetName) throws IOException 
 	{
 
-		   File file = new File("user.dir" + "/src/main/resources/Elements.xlsx");
+
+		File file = new File(System.getProperty("user.dir")+"/src/main/resources/Elements.xlsx");
 	         FileInputStream fIP = new FileInputStream(file);
-		
-			//	new XSSFWorkbook(file);
-		
+
 		XSSFWorkbook workbook = new XSSFWorkbook(fIP);		
 		Sheet sheet = 	  workbook.getSheet(sheetName);
 		//test array 

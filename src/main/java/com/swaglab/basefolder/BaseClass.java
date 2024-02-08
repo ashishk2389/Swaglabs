@@ -50,7 +50,7 @@ public class BaseClass {
     	/* Chrome driver*/
     	if(browserName.equals("chrome")) {
     		System.setProperty("webdriver.chrome.driver",
-    				"user.dir" + "/selenium_resource/chromedriver_mac64/chromedriver");
+    				System.getProperty("user.dir")+  "//selenium_resource//chromedriver_mac64//chromedriver");
     		driver  = new ChromeDriver();
     		
     	}
@@ -58,7 +58,7 @@ public class BaseClass {
     	else if (browser.equalsIgnoreCase("firefox"))
     	{
     		System.setProperty("webdriver.firefox.driver",
-					"user.dir" + "/sourcetracking_automation/src/main/resources/drivers/geckodriver.exe");
+    				System.getProperty("user.dir") + "/sourcetracking_automation/src/main/resources/drivers/geckodriver.exe");
     		
     		driver = new FirefoxDriver();
     	}
