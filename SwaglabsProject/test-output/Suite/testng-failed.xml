@@ -5,12 +5,14 @@
     <parameter name="pass" value="secret_sauce"/>
     <parameter name="user" value="standard_user"/>
     <classes>
-      <class name="com.swaglab.testscript.ProductPageTest">
+      <class name="com.swaglab.testscript.LoginPageTestTest">
         <methods>
           <include name="initilizeBroswer"/>
-          <include name="addtocart" invocation-numbers="0"/>
+          <include name="testLogin"/>
+          <include name="testLogo"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- com.swaglab.testscript.ProductPageTest -->
+      </class> <!-- com.swaglab.testscript.LoginPageTestTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

@@ -5,36 +5,77 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ProductPage {
-	
-WebDriver driver;
-	
-	public ProductPage(WebDriver driver)
-	{
-		  this.driver = driver;
-		  PageFactory.initElements(driver, this);
-		  System.out.print("LoginPage constructor has been called");
+import com.swaglab.basefolder.BaseClass;
 
-	}
+public class ProductPage extends BaseClass{
+	
+	public int itemsAddedToCart =0;
+	
+//	PageFctory -- Object Repo
+	
 //	product1 add to cart 
 	@FindBy(xpath="//button[@id='add-to-cart-sauce-labs-backpack']")
 	public
-	WebElement product1 ;
+	WebElement backpack ;
 
 //	product2 add to cart 
 	@FindBy(id="//button[@id='add-to-cart-sauce-labs-bike-light']")
 	public
-	WebElement product2;
+	WebElement bikeLight;
 	
 //	product3 add to cart 
 	public
 	@FindBy(xpath="//button[@id='add-to-cart-sauce-labs-onesie']")
-	WebElement product3;
+	WebElement onesie;
 	
 //	product4 add to cart 
 	@FindBy(xpath="//button[@id='add-to-cart-test.allthethings()-t-shirt-(red)']")
 	public
-	WebElement product4;
+	WebElement tShirt;
+	
+//	Shopping cart container
+	@FindBy(xpath="//a[@class='shopping_cart_link']//span")
+	public
+	WebElement addToCartIcon;
+	
 
+	//Intilization of the page objects	
+	
+	public ProductPage() {
+		PageFactory.initElements(driver, this);
+	}
+	
+//Actions:
+	public WebElement addToCartBackpack()
+	{
+		backpack.click();
+		itemsAddedToCart++;
+		return backpack;
+		
+	}
+	public WebElement addToCartBikeLight()
+	{
+		bikeLight.click();
+		itemsAddedToCart++;
+		return bikeLight;
+	}
+	public WebElement addToCartOnesie()
+	{
+		onesie.click();
+		itemsAddedToCart++;
+		return onesie;
+	}
+	public WebElement addToCartTShirt()
+	{
+		tShirt.click();
+		itemsAddedToCart++;
+		return tShirt;
+	}
+	
+	public WebElement validateAddToCartIcon()
+	{
+		return addToCartIcon;
+	}
+	
 
 }

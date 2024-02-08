@@ -13,53 +13,63 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import com.swaglab.utilitycomponent.TestTimeUtil;
 
 public class BaseClass {
 
 	public static Properties prop;
 	public static String browser = "chrome";
 	
-	public WebDriver driver;
+	public static WebDriver driver;
     static Logger log = Logger.getLogger(BaseClass.class);
 
-
-////	Call from the properties files
-//	static {
-//
-//		try {
-//			FileInputStream fin = new FileInputStream(new File(System.getProperty("/Users/ashishkumar/Work/Work/Java_WorkSpace/SwaglabsProject/Configuration/Config.properties")));
-//			prop = new Properties();
-//			prop.load(fin);
-//			browser = prop.getProperty("app.test.browser");
-//
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//	}
-
-	// Method to open and maximize the browser
-	public void getDriver() {
-		if (browser.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.chrome.driver",
-					"/Users/ashishkumar/Work/Work/selenium_resource/chromedriver_mac64/chromedriver");
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--remote-allow-origins=*");
-//			ChromeDriver driver = new ChromeDriver(options);
-			driver = new ChromeDriver(options);
-		} else if (browser.equalsIgnoreCase("firefox")) {
-			System.setProperty("webdriver.firefox.driver",
-					"user.dir" + "/sourcetracking_automation/src/main/resources/drivers/geckodriver.exe");
-			// driver = new FirefoxFilter();
+    
+    public BaseClass()
+    {
+    	prop = new Properties();
+		try {
+			FileInputStream fin = new FileInputStream("/Users/ashishkumar/git/Swaglabs/SwaglabsProject/src/main/java/com/swaglab/configcomponent/Config.properties");
+			prop.load(fin);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.manage().window().maximize();
-		driver.get("https://www.saucedemo.com");
+
+    	
+    }
+
+    
+    //initlize the browser
+    public static void initilization() {
+    	
+    	String browserName  = prop.getProperty("app.test.browser");
+    	/* Chrome driver*/
+    	if(browserName.equals("chrome")) {
+    		System.setProperty("webdriver.chrome.driver",
+					"/Users/ashishkumar/Work/Work/selenium_resource/chromedriver_mac64/chromedriver");
+    		driver  = new ChromeDriver();
+    		
+    	}
+//    	firefox driver
+    	else if (browser.equalsIgnoreCase("firefox"))
+    	{
+    		System.setProperty("webdriver.firefox.driver",
+					"user.dir" + "/sourcetracking_automation/src/main/resources/drivers/geckodriver.exe");
+    		
+    		driver = new FirefoxDriver();
+    	}
+    	
+    	driver.manage().window().maximize();
+    	driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(TestTimeUtil.page_load_timeout));
+    	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TestTimeUtil.implicitWait));
+    	driver.get(prop.getProperty("url"));
+    }
+    
+    
 	
-	}
 
 }

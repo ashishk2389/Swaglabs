@@ -6,7 +6,9 @@
       <class name="com.swaglab.testscript.LoginPageTestTest">
         <methods>
           <include name="initilizeBroswer"/>
-          <include name="testLoginTest"/>
+          <include name="testLogin"/>
+          <include name="tearDown"/>
+          <include name="testLogo"/>
         </methods>
       </class> <!-- com.swaglab.testscript.LoginPageTestTest -->
     </classes>

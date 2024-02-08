@@ -1,55 +1,60 @@
 package com.swaglab.testscript;
 
-import java.time.Duration;
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import com.swaglab.basefolder.BaseClass;
 import com.swaglab.pageobject.LoginPage;
+import com.swaglab.utilitycomponent.ExcelReader;
+import java.io.IOException;
+import java.time.Duration;
+import org.junit.Assert;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
-public class LoginPageTestTest {
-	
-	
-	BaseClass base = new BaseClass();
-	String ExpectedTitle = "https://www.saucedemo.com/inventory.html";
-//	WebDriver driver = base.driver;
-	
-	@BeforeTest  
-public  void initilizeBroswer()
+public class LoginPageTestTest extends BaseClass {
+   LoginPage LoginPage;
+   ExcelReader testData;
 
-  {
-	System.out.print("browser_initilize");
-	  base.getDriver();
-  }
-  
+   @BeforeSuite
+   public void initilizeBroswer() {
+      initilization();
+      this.LoginPage = new LoginPage();
+   }
 
-  @Test
-  @Parameters({"user","pass"})
-  public void testLoginTest(String user,String pass) {
-		LoginPage loginPage = new LoginPage(base.driver);
-	    loginPage.user.sendKeys(user);
-		loginPage.password.sendKeys(pass);
-		loginPage.login.click();
-	  System.out.print("wokring");
-	  base.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-//	  Check if login was sucessfull
-	  Assert.assertEquals(ExpectedTitle, base.driver.getCurrentUrl());
-  }
-  
+//   @Test(
+//      priority = 1,
+//      description = "Testing the logo is visible "
+//   )
+//   public void testLogo() {
+//      Assert.assertEquals(this.LoginPage.vlidateLogo(), "Swag Labs");
+//   }
 
-  
-//  
-//	@AfterTest  
-//public  void  closeBroswer()
-//
-//{
-//		base.driver.quit();
-//}
+   @DataProvider
+   public String[][] getCredentails() throws IOException {
+      return ExcelReader.getLoginCredenatils("Sheet1");
+   }
 
-   
- 
+   @Test(
+      priority = 1,
+      dataProvider = "getCredentails",
+      description = "Testing login functionality"
+   )
+   public void testLogin(String user, String pass, String status) throws InterruptedException, IOException {
+      String result = this.LoginPage.vlidateLogin(user, pass);
+      String statusNew;
+      if (result.equals("https://www.saucedemo.com/inventory.html")) {
+         statusNew = "PASS";
+         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5L));
+         this.LoginPage.logout();
+      } else {
+         statusNew = "FAIL";
+      }
+
+      Assert.assertEquals(statusNew, status);
+   }
+
+   @AfterSuite
+   public void tearDown() {
+      driver.quit();
+   }
 }
